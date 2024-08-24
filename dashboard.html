@@ -5,49 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>控制面板</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        button {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+        /* 您的 CSS 代碼 */
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>歡迎來到控制面板</h1>
-        <p>這是只有登入後才可訪問的頁面。</p>
+        <h1>控制面板</h1>
         <button onclick="logout()">登出</button>
+
+        <h2>管理帳號密碼</h2>
+        <input type="email" id="newEmail" placeholder="輸入電子郵件">
+        <input type="password" id="newPassword" placeholder="輸入新密碼">
+        <button onclick="addAccount()">新增帳號</button>
+        <button onclick="deleteAccount()">刪除帳號</button>
+
+        <h3>帳號列表</h3>
+        <ul id="accountList"></ul>
     </div>
 
     <script>
-        // 登出功能
         function logout() {
-            window.location.href = 'index.html'; // 返回登入頁面
+            window.location.href = 'index.html';
         }
+
+        function addAccount() {
+            const email = document.getElementById('newEmail').value;
+            const password = document.getElementById('newPassword').value;
+
+            if (email && password) {
+                localStorage.setItem(email, password);
+                alert('帳號已新增');
+                loadAccounts();
+            } else {
+                alert('請輸入電子郵件和密碼');
+            }
+        }
+
+        function deleteAccount() {
+            const email = document.getElementById('newEmail').value;
+
+            if (email) {
+                localStorage.removeItem(email);
+                alert('帳號已刪除');
+                loadAccounts();
+            } else {
+                alert('請輸入電子郵件');
+            }
+        }
+
+        function loadAccounts() {
+            const accountList = document.getElementById('accountList');
+            accountList.innerHTML = '';
+
+            for (const key in localStorage) {
+                if (key !== 'loggedIn') {
+                    const li = document.createElement('li');
+                    li.textContent = key;
+                    accountList.appendChild(li);
+                }
+            }
+        }
+
+        // 當頁面加載時，顯示帳號列表
+        window.onload = function() {
+            loadAccounts();
+        };
     </script>
 </body>
 </html>
+
 
 
