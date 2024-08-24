@@ -42,11 +42,6 @@
     </div>
 
     <script>
-        // 檢查用戶是否已登入
-        if (!localStorage.getItem('loggedIn')) {
-            window.location.href = 'index.html'; // 沒有登入狀態，重定向到登入頁面
-        }
-
         // 登出功能
         function logout() {
             localStorage.removeItem('loggedIn'); // 清除登入狀態
