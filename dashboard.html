@@ -55,9 +55,13 @@
 
         function listAllAccounts() {
             const accountList = document.getElementById('accountList');
+            accountList.innerHTML = ''; // 清除之前的列表
+
+            // 列出所有儲存的帳號
             for (let i = 0; i < localStorage.length; i++) {
                 let key = localStorage.key(i);
                 let value = localStorage.getItem(key);
+                console.log('帳號:', key, '密碼:', value); // 輸出帳號和密碼
                 accountList.innerHTML += `<p>帳號: ${key}, 密碼: ${value}</p>`;
             }
         }
