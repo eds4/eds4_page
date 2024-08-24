@@ -48,17 +48,15 @@
             const accountList = document.getElementById('accountList');
             accountList.innerHTML = ''; // 清除之前的列表
 
-            // 檢查 localStorage 是否有任何項目
-            if (localStorage.length === 0) {
-                accountList.innerHTML = '<p>沒有儲存的帳號</p>';
-                return;
-            }
-
-            // 列出所有儲存的帳號
+            // 列出所有儲存的帳號，但排除不相關的鍵
             for (let i = 0; i < localStorage.length; i++) {
                 let key = localStorage.key(i);
-                let value = localStorage.getItem(key);
-                accountList.innerHTML += `<p>帳號: ${key}, 密碼: ${value}</p>`;
+                
+                // 排除 `loggedIn` 或其他特定的鍵
+                if (key !== 'loggedIn') {
+                    let value = localStorage.getItem(key);
+                    accountList.innerHTML += `<p>帳號: ${key}, 密碼: ${value}</p>`;
+                }
             }
         }
 
