@@ -53,15 +53,13 @@
             }
         }
 
-        function loadAccounts() {
+        function listAllAccounts() {
             const accountList = document.getElementById('accountList');
-
-            for (const key in localStorage) {
-                if (key !== 'loggedIn') {
-                    const li = document.createElement('li');
-                    li.textContent = key;
-                    accountList.appendChild(li);
-                }
+            accountList.innerHTML = ''; // 清除之前的列表
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let value = localStorage.getItem(key);
+                accountList.innerHTML += `<p>帳號: ${key}, 密碼: ${value}</p>`;
             }
         }
 
