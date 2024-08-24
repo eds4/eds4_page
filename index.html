@@ -5,41 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登入頁面</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        input {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 100%;
-            max-width: 300px;
-        }
-        button {
-            padding: 10px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+      body {
+          font-family: Arial, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background-color: #f0f0f0;
+      }
+      .container {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          width: 100%;
+          max-width: 360px; /* 最大寬度 */
+          box-sizing: border-box; /* 確保內邊距和邊框不會影響寬度 */
+      }
+      input {
+          display: block;
+          margin: 10px auto;
+          padding: 10px;
+          width: 100%;
+          max-width: 300px; /* 最大寬度 */
+          box-sizing: border-box; /* 確保內邊距和邊框不會影響寬度 */
+      }
+      button {
+          padding: 10px;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          width: 100%;
+          max-width: 300px; /* 最大寬度 */
+      }
+      button:hover {
+          background-color: #0056b3;
+      }
+  </style>
 </head>
 <body>
     <div class="container">
@@ -54,7 +60,6 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // 簡單驗證，實際應用中應該做更多的安全檢查
             if (email && password) {
                 localStorage.setItem('loggedIn', 'true');
                 window.location.href = 'dashboard.html'; // 登入成功，跳轉到控制面板
