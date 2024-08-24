@@ -10,6 +10,7 @@
 <body>
     <div class="container">
         <h1>帳號管理</h1>
+        <button onclick="logout()">登出</button>
         <input type="text" id="username" placeholder="輸入帳號">
         <input type="password" id="password" placeholder="輸入密碼">
         <button onclick="saveAccount()">儲存帳號</button>
@@ -58,6 +59,9 @@
                 let key = localStorage.key(i);
                 let value = localStorage.getItem(key);
                 accountList.innerHTML += `<p>帳號: ${key}, 密碼: ${value}</p>`;
+            }
+            function logout() {
+                window.location.href = "index.html";
             }
         }
     </script>
