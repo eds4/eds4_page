@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登入頁面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+        }
+        #message {
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <h1>登入</h1>
@@ -13,50 +31,40 @@
     <button onclick="signUp()">註冊</button>
     <p id="message"></p>
 
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
     <script>
-        // Firebase 配置
-        const firebaseConfig = {
-            apiKey: "您的API密鑰",
-            authDomain: "您的項目ID.firebaseapp.com",
-            projectId: "您的項目ID",
-            storageBucket: "您的項目ID.appspot.com",
-            messagingSenderId: "您的發送者ID",
-            appId: "您的應用ID"
-        };
-
-        // 初始化 Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-
         function signUp() {
-          const email = document.getElementById('email').value;
-          const password = document.getElementById('password').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
 
-          auth.createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-              // 帳號創建成功
-              console.log('帳號創建成功:', userCredential.user);
-            })
-            .catch((error) => {
-              console.error('創建帳號失敗:', error.message);
-            });
+            if (!email || !password) {
+                document.getElementById('message').textContent = '請輸入電子郵件和密碼';
+                return;
+            }
+
+            // 儲存用戶資料到 Local Storage
+            localStorage.setItem(email, password);
+            document.getElementById('message').textContent = '帳號創建成功!';
         }
 
-        // 登入功能
         function login() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            auth.signInWithEmailAndPassword(email, password)
-                .then(userCredential => {
-                    // 登入成功，重定向到 dashboard.html
-                    window.location.href = "dashboard.html";
-                })
-                .catch(error => {
-                    document.getElementById('message').textContent = `錯誤: ${error.message}`;
-                });
+            if (!email || !password) {
+                document.getElementById('message').textContent = '請輸入電子郵件和密碼';
+                return;
+            }
+
+            // 從 Local Storage 中檢查用戶資料
+            const storedPassword = localStorage.getItem(email);
+
+            if (storedPassword === password) {
+                document.getElementById('message').textContent = '登入成功!';
+                // 這裡可以跳轉到其他頁面
+                // window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('message').textContent = '登入失敗';
+            }
         }
     </script>
 </body>
