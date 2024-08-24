@@ -10,6 +10,7 @@
     <input type="email" id="email" placeholder="輸入電子郵件">
     <input type="password" id="password" placeholder="輸入密碼">
     <button onclick="login()">登入</button>
+    <button onclick="signUp()">註冊</button>
     <p id="message"></p>
 
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
@@ -28,6 +29,20 @@
         // 初始化 Firebase
         const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
+
+        function signUp() {
+          const email = document.getElementById('email').value;
+          const password = document.getElementById('password').value;
+
+          auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+              // 帳號創建成功
+              console.log('帳號創建成功:', userCredential.user);
+            })
+            .catch((error) => {
+              console.error('創建帳號失敗:', error.message);
+            });
+        }
 
         // 登入功能
         function login() {
