@@ -64,6 +64,12 @@
         function logout() {
             window.location.href = "index.html";
         }
+
+        if (localStorage.getItem('loggedIn') !== 'true') {
+        // 如果未登入，重定向回登入頁面
+        window.location.href = 'index.html';
+    }
+    
     </script>
 </body>
 </html>
